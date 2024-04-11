@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="UTF-8"/>
+  <meta http-equiv="x-UA-compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="style.css"/>
+  <script
+  src="https://kit.fontawesome.com/64d58efce2.js"
+  crossorigin="anonymous"></script>
+  <script src="script.js"></script>
+  <script src="canvas.js"></script>
+  <title>Weather</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-weather/1.0.0/bootstrap-weather.min.css" integrity="sha512-Dzi0zz9zCe2olZNhq+wnzGjO5ILOv8f/yD6j8srW+XGnnv9dUN04eEoIdVHxQqiy8uBn21niIWQpiCzYJEH3yg==" crossorigin="anonymous" referrerpolicy="no-referrer" />"
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-weather/1.0.0/bootstrap-weather.rtl.min.css" integrity="sha512-9T1NdqjWrFbCzAdmtAfhtMLnOXOsb0xwcs/B5qlGevZcNc6PePt+ghTACNSQch/WZqq4K3Sn+cXYJhiDIXBJwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.min.js" integrity="sha512-WW8/jxkELe2CAiE4LvQfwm1rajOS8PHasCCx+knHG0gBHt8EXxS6T6tJRTGuDQVnluuAvMxWF4j8SNFDKceLFg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link rel="stylesheet" href="https://www.cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+<script src="https://code.jquery.com/jquery-1.8.2.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+  <script>
+    window.onload = function () {
+    
+    var chart = new CanvasJS.Chart("chartContainer", {
+      exportEnabled: true,
+      animationEnabled: true,
+      toolTip: {
+        shared: true
+      },
+      legend: {
+        cursor: "pointer",
+        itemclick: toggleDataSeries
+      },
+      data: [{
+        type: "column",
+        name: "rain",
+        showInLegend: true,      
+        
+        dataPoints: [
+          { label: "",  y: 100 },
+          { label: "", y: 90 },
+          { label: "", y: 80  },
+          { label: "",  y: 70  },
+          { label: "",  y: 60  }
+        ]
+      },
+      {
+        type: "column",
+        name: "sun",
+        axisYType: "secondary",
+        showInLegend: true,
+        
+        dataPoints: [
+          { label: "", y: 10 },
+          { label: "", y: 65 },
+          { label: "", y: 40  },
+          { label: "", y: 90 },
+          { label: "", y: 50 }
+        ]
+      }]
+    });
+    chart.render();
+    
+    function toggleDataSeries(e) {
+      if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+        e.dataSeries.visible = false;
+      } else {
+        e.dataSeries.visible = true;
+      }
+      e.chart.render();
+    }
+    
+    }
+    </script>
+
+</head>
+<body>
+  <div class="col-lg-12 col-md-12 col-md-12" style="display: inline-flex">
+        <div class="main">
+          <nav>
+            <ul class="option">
+              <h1 class="hourly" style="color: rgb(0, 201, 201);">07:32 AM</h1> 
+              <h6 class="week active">wednesday, 14 April,2021</h6>
+              <div class="d-flex justify-content align-items-left">
+                <i class="fas fa-sun" style="color: rgb(0, 201, 201);">Good Morning, Akash!</i>
+              </div>
+             </ul>
+             <div class="btn-group">
+              <button><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-sun" viewBox="0 0 16 16">
+                <path d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6m0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0m0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13m8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5M3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8m10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0m-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707M4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
+              </svg></button>
+              <button><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-moon" viewBox="0 0 16 16">
+                <path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278M4.858 1.311A7.269 7.269 0 0 0 1.025 7.71c0 4.02 3.279 7.276 7.319 7.276a7.316 7.316 0 0 0 5.205-2.162c-.337.042-.68.063-1.029.063-4.61 0-8.343-3.714-8.343-8.29 0-1.167.242-2.278.681-3.286z"/>
+              </svg></button>
+            </div>
+             </nav> 
+             <div class="cards" id="weather-cards">
+              <div class="card">
+                <h2 class="day-name">sun</h2>
+                <div class="card-icon">
+                 <img src="icons/light/lightning-svgrepo-com.svg"alt="moon"/>
+                </div>
+                <div class="day-temp">
+                <h2 class="temp" style="color: #0e1111;">29<sup>o</sup></h2>
+                </div>
+              </div>
+              <div class="card">
+                <h2 class="day-name">Mon</h2>
+                <div class="card-icon">
+                 <img src="icons/rain/water.png"alt="moon"/>
+                </div>
+                <div class="day-temp">
+                  <h2 class="temp" style="color: #0e1111;">17<sup>o</sup></h2>
+                  </div>
+              </div>
+              <div class="card">
+                <h2 class="day-name">Tue</h2>
+                <div class="card-icon">
+                 <img src="icons/sun cloud/cloudy.png"alt="moon"/>
+                </div>
+                <div class="day-temp">
+                  <h2 class="temp" style="color: #0e1111;">20<sup>o</sup></h2>
+                  </div>
+              </div>
+              <div class="card">
+                <h2 class="day-name">Wed</h2>
+                <div class="card-icon">
+                 <img src="icons/Storm/storm.png"alt="moon"/>
+                </div>
+                <div class="day-temp">
+                  <h2 class="temp" style="color: #0e1111;">29<sup>o</sup></h2>
+                  </div>
+              </div>
+              <div class="card">
+                <h2 class="day-name">Thu</h2>
+                <div class="card-icon">
+                 <img src="icons/wind/cloud.png"alt="moon"/>
+                </div>
+                <div class="day-temp">
+                  <h2 class="temp" style="color: #0e1111;">22<sup>o</sup></h2>
+                  </div>
+              </div>
+              <div class="card">
+                <h2 class="day-name">Fri</h2>
+                <div class="card-icon">
+                 <img src="icons/moon/half-moon.png"alt="moon"/>
+                </div>
+                <div class="day-temp">
+                  <h2 class="temp" style="color: #0e1111;">16<sup>o</sup></h2>
+                  </div>
+              </div>
+            </div>
+            
+              <div class="container py-5 h-90">
+                <div class="row" style="height: 900px;">
+                  <div class="col-md-6 col-xl-6" style="border: #4B515D;height: 200px;">
+                    <div class="row d-flex justify-content-left align-items-left h-20">
+                          <div class="shadow p-3 mb-5 bg-white rounded" style= "margin-bottom: 50px;">
+                          <div class="card-body p-6">
+                            <div class="row text-center">
+                              <div class="col-md-12 text-center"
+                                style="margin-top: -1.5rem; margin-bottom: -1.5rem; border-radius: 30px;">
+                                <div class="row">
+                                <div class="col-md-3 col-xl-6">
+                                  <p><STRONG>Air Quality index</STRONG></p>
+                                 </div>
+                                 <div class="col-md-3 col-xl-3">
+                                  <div class="custom-select"style="border: 0;">
+                                    <select> 
+                                     <option value="">Uttara,Dhaka</option>
+                                     <option value="">Hooghly</option>
+                                    <option value="">West Bengal</option>
+                                    </select>
+                                  </div>
+                                  </div>
+                                  </div>
+                                  <i class="d-flex justify-content align-items-left" style="color: #3FF791;">
+                                  <img src="icons/fresh air/fresh-air.png"alt="moon" style="width: 30px; color: #3FF791;"/>
+                                  <strong>&nbsp Good</strong></i>
+                                  <div class="d-flex justify-content align-items-left">A perfect day for walk</div>
+              
+                                <div class="d-flex justify-content-around align-items-center mb-3">
+                                  <div class="flex-column border" style="background-color:rgb(223, 255, 243); border-radius: 10px; padding: .75rem; margin: 2px;">
+                                    <p class="small mb-1" style="color: #1af77d;">9.3</p>
+                                    <p class="small mb-0"style="color: #1af77d;"><strong>PM2</strong></p>
+                                  </div>
+                                  <div class="flex-column border" style="background-color:rgb(223, 255, 243); border-radius: 10px; padding: .75rem; margin: 2px;">
+                                    <p class="small mb-1"style="color: #1af77d;">12.2</p>
+                                    <p class="small mb-0"style="color: #1af77d;"><strong>PM10</strong></p>
+                                  </div>
+                                  <div class="flex-column border" style="background-color:rgb(223, 255, 243); border-radius: 10px; padding: .75rem; margin: 2px;">
+                                    <p class="small mb-1"style="color: #1af77d;">4.8</p>
+                                    <p class="small mb-0"style="color: #1af77d;"><strong>SO2</strong></p>
+                                  </div>
+                                  <div class="flex-column border" style="background-color:rgb(223, 255, 243); border-radius: 10px; padding: .75rem; margin: 2px;">
+                                    <p class="small mb-1"style="color: #1af77d;">4.6</p>
+                                    <p class="small mb-0"style="color: #1af77d;"><strong>NO2</strong></p>
+                                  </div>
+                                  <div class="flex-column border" style="background-color:rgb(223, 255, 243); border-radius: 10px; padding: .75rem; margin: 2px;">
+                                    <p class="small mb-1"style="color: #1af77d;">6.5</p>
+                                    <p class="small mb-0"style="color: #1af77d;"><strong>O3</strong></p>
+                                  </div>
+                                  <div class="flex-column border" style="background-color:rgb(223, 255, 243); border-radius: 10px; padding: .75rem; margin: 2px;">
+                                    <p class="small mb-1"style="color: #1af77d;">0.9</p>
+                                    <p class="small mb-0"style="color: #1af77d;"><strong>CO</strong></p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            </div>
+                          </div>
+                        </div>
+                  </div>
+                    <div class="col-md-6 col-xl-6" style="border: #4B515D;">
+                      <div class="row d-flex justify-content-left align-items-left h-20">
+                            <div class="shadow p-3 mb-5 bg-white rounded" style= "margin-bottom: 50px; margin-left: 10px;">
+                            <div class="card-body p-6">
+                              <div class="row text-center">
+                                <div class="col-md-12 text-center"
+                                  style="margin-top: -1.5rem; margin-bottom: -1.5rem; border-radius: 30px;">
+                                  <div class="row">
+                                  <div class="col-md-3 col-xl-6">
+                                    <p><STRONG>Sunrise & Sunset</STRONG></p>
+                                   </div>
+                                   <div class="col-md-3 col-xl-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                                      <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                                      <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+                                    </svg>
+                                    </div>
+                                    </div>
+                            <div class="flex-column border" style="background-color:rgb(253, 234, 209); border-radius: 10px; padding: .75rem; margin: 2px;">
+                              <div style="float: left;"><i class="fa fa-map-marker">Dhaka</i></div>
+                                <div class="col d-flex align-items-start">
+                                <div>
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="50" height="30" fill="currentColor" class="bi bi-sun" viewBox="0 0 16 16" style="color: #f18d08;">
+                                    <path d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6m0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0m0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13m8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5M3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8m10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0m-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707M4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
+                                  </svg>
+                                    <span style="color:#1a42f749">Sunrise</span>
+                                  <p style="color:#1a42f7"><strong>4:40AM</strong></p>
+                                </div>
+                                <div style="margin-left: 20px;">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="50" height="30" fill="currentColor" class="bi bi-moon" viewBox="0 0 16 16" style="color: #f18d08;">
+                                    <path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278M4.858 1.311A7.269 7.269 0 0 0 1.025 7.71c0 4.02 3.279 7.276 7.319 7.276a7.316 7.316 0 0 0 5.205-2.162c-.337.042-.68.063-1.029.063-4.61 0-8.343-3.714-8.343-8.29 0-1.167.242-2.278.681-3.286z"/>
+                                  </svg>
+                                    <span style="color:#1a42f749">Sunset</span>
+                                  <p style="color:#1a42f7"><strong>6:53PM</strong></p>
+                                </div>
+                            </div>
+                          </div>
+                          <div class="flex-column border" style="background-color:rgb(253, 234, 209); border-radius: 10px; padding: .75rem; margin: 2px;">
+                            <div style="float: left;"><i class="fa fa-map-marker">Tokyo</i></div>
+                              <div class="col d-flex align-items-start">
+                              <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="30" fill="currentColor" class="bi bi-sun" viewBox="0 0 16 16" style="color: #f18d08;">
+                                  <path d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6m0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0m0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13m8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5M3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8m10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0m-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707M4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
+                                </svg>
+                                  <span style="color:#1a42f749">Sunrise</span>
+                                <p style="color:#1a42f7"><strong>4:47AM</strong></p>
+                              </div>
+                              <div style="margin-left: 20px;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="30" fill="currentColor" class="bi bi-moon" viewBox="0 0 16 16" style="color: #f18d08;">
+                                  <path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278M4.858 1.311A7.269 7.269 0 0 0 1.025 7.71c0 4.02 3.279 7.276 7.319 7.276a7.316 7.316 0 0 0 5.205-2.162c-.337.042-.68.063-1.029.063-4.61 0-8.343-3.714-8.343-8.29 0-1.167.242-2.278.681-3.286z"/>
+                                </svg>
+                                  <span style="color:#1a42f749">Sunset</span>
+                                <p style="color:#1a42f7"><strong>6:49PM</strong></p>
+                              </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    </div>
+                    <div class="d-flex justify-content-around align-items-center mb-3"style="margin-top:10px">
+                      <div class="d-flex justify-content-around align-items-center mb-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16" style="margin-right: 5px; color:#f18d08">
+                          <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6"/>
+                        </svg>
+                        <div style="color:#1a42f7"><strong>Kabul</strong></div>
+                      </div>
+                      <div class="d-flex justify-content-around align-items-center mb-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-sun" viewBox="0 0 16 16" style="margin-right: 5px; color:#f18d08">
+                          <path d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6m0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0m0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13m8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5M3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8m10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0m-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707M4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
+                        </svg>
+                        <div style="color:#2d2e31a8">5:00AM</div>
+                      </div>
+                      <div class="d-flex justify-content-around align-items-center mb-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-moon-stars" viewBox="0 0 16 16" style="margin-right: 5px; color:#f18d08">
+                          <path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278M4.858 1.311A7.269 7.269 0 0 0 1.025 7.71c0 4.02 3.279 7.276 7.319 7.276a7.316 7.316 0 0 0 5.205-2.162c-.337.042-.68.063-1.029.063-4.61 0-8.343-3.714-8.343-8.29 0-1.167.242-2.278.681-3.286z"/>
+                          <path d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z"/>
+                        </svg>
+                        <div>7:00PM</div>
+                      </div>
+                    </div>
+                    <div class="d-flex justify-content-around align-items-center mb-3"style="margin-top:10px">
+                      <div class="d-flex justify-content-around align-items-center mb-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16" style="margin-right: 5px; color:#f18d08">
+                          <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6"/>
+                        </svg>
+                        <div style="color:#1a42f7"><strong>Algeria</strong></div>
+                      </div>
+                      <div class="d-flex justify-content-around align-items-center mb-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-sun" viewBox="0 0 16 16" style="margin-right: 5px; color:#f18d08">
+                          <path d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6m0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0m0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13m8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5M3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8m10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0m-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707M4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
+                        </svg>
+                        <div style="color:#2d2e31a8">5:50AM</div>
+                      </div>
+                      <div class="d-flex justify-content-around align-items-center mb-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-moon-stars" viewBox="0 0 16 16" style="margin-right: 5px; color:#f18d08">
+                          <path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278M4.858 1.311A7.269 7.269 0 0 0 1.025 7.71c0 4.02 3.279 7.276 7.319 7.276a7.316 7.316 0 0 0 5.205-2.162c-.337.042-.68.063-1.029.063-4.61 0-8.343-3.714-8.343-8.29 0-1.167.242-2.278.681-3.286z"/>
+                          <path d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z"/>
+                        </svg>
+                        <div>7:49PM</div>
+                      </div>
+                    </div>
+                    <div class="d-flex justify-content-around align-items-center mb-3"style="margin-top:10px">
+                      <div class="d-flex justify-content-around align-items-center mb-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16" style="margin-right: 5px; color:#f18d08">
+                          <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6"/>
+                        </svg>
+                        <div style="color:#1a42f7"><strong>Tirana</strong></div>
+                      </div>
+                      <div class="d-flex justify-content-around align-items-center mb-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-sun" viewBox="0 0 16 16" style="margin-right: 5px; color:#f18d08">
+                          <path d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6m0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0m0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13m8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5M3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8m10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0m-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707M4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
+                        </svg>
+                        <div style="color:#2d2e31a8">5:31AM</div>
+                      </div>
+                      <div class="d-flex justify-content-around align-items-center mb-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-moon-stars" viewBox="0 0 16 16" style="margin-right: 5px; color:#f18d08">
+                          <path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278M4.858 1.311A7.269 7.269 0 0 0 1.025 7.71c0 4.02 3.279 7.276 7.319 7.276a7.316 7.316 0 0 0 5.205-2.162c-.337.042-.68.063-1.029.063-4.61 0-8.343-3.714-8.343-8.29 0-1.167.242-2.278.681-3.286z"/>
+                          <path d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z"/>
+                        </svg>
+                        <div>8:04PM</div>
+                      </div>
+                    </div>
+                    </div>
+                    </div>
+                    </div>
+                    <div class="w-100"></div>
+                 <div class="col-xl-6 col-md-6" style="margin-top: -550px;">
+                      <div class="shadow p-3 mb-5 bg-white rounded">
+                        <h6> Monthly Rainfall</h6>
+                        <div id="chartContainer" style="height: 200px; width: 100%;">
+                          <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
+                      </div>
+                    </div>
+                </div>
+               </div> 
+                </div>
+              </div>
+              
+          <div class="col-lg-3 col-md-3 col-sm-2 sidebar">
+            <form action="" class="search" id="search">
+              <input type="text" id="query" placeholder="search...">
+              <span><button><i class="fas fa-search"></i></button></span>
+            </form>
+            <section class="vh-30" style="background-color: #a7f9ff;">
+              <div class="container py-2">
+                <div class="row d-flex justify-content-center align-items-center h-100">
+                  <div class="col-md-2 col-lg-2 col-xl-12">
+                   <div class="card" style="color: #121616; border-radius: 35px;">
+                      <div class="card-body p-4">
+                        <div class="d-flex">
+                          <h6 class="flex-grow-1">Dhaka</h6>
+                        </div>
+                           <div class="d-flex flex-column text-center mt-5 mb-4">
+                          <h6 class="display-5 mb-0 font-weight-bold" style="color: #1C2331;"> 29°C </h6>
+                          <span class="small" style="color:#0e1111">Stormy</span>
+                         </div>
+                            <div class="d-flex align-items-center">
+                          <div class="flex-grow-1" style="font-size: 15px;">
+                            <div>
+                              <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-weather/ilu1.webp"
+                                width="50px">
+                            </div>
+                            <div><i class="fas fa-wind fa-fw" style="color: #868B94;"></i> <span class="ms-1"> 40 km/h
+                              </span></div>
+                            <div><i class="fas fa-tint fa-fw" style="color: #868B94;"></i> <span class="ms-1"> 84% </span>
+                            </div>
+                            <div><i class="fas fa-sun fa-fw" style="color: #868B94;"></i> <span class="ms-1"> 0.2h </span>
+                            </div>
+                          </div>
+                        </div>          
+                    </div>
+                </div>
+             </div>
+          </div>    
+        </div>
+      </section>
+      </div>
+      </div>
+
+
+
+
+
+
+
+
+
+
+      
+  </body>
+</html> 
